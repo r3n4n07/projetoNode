@@ -6,11 +6,20 @@ import prettierConfig from "eslint-config-prettier";
 
 export default [
   {
-    files: ["**/*.{ts}"], // Verifica todos os arquivos TS no projeto
+    files: ["src/**.{ts}"], // Verifica todos os arquivos TS no projeto
     languageOptions: { globals: globals.node },
     rules: {
       // Configura Prettier para rodar como uma regra do ESLint
       "prettier/prettier": "error", // Você pode trocar para "error" se quiser que o código falhe na formatação
+    },
+  },
+  {
+    files: ["jest.config.js"], // Configurações específicas para arquivos CommonJS
+    languageOptions: {
+      globals: globals.node, // Usa o ambiente Node.js, que define o `module`
+    },
+    rules: {
+      "no-undef": "off", // Desativa a regra no-undef para este arquivo
     },
   },
   pluginJs.configs.recommended,

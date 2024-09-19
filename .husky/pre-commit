@@ -1,5 +1,9 @@
-echo 'Check for linting errors and run tests'
+echo 'Check for linting errors'
 
 npm run check || (echo 'Linting errors or test failed' && exit 1);
+
+echo "Check for jest tests"
+
+npm run test:watch || (echo "Test failed" && exit 1);
 
 echo "Done"
