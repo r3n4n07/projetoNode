@@ -3,16 +3,20 @@ import { config } from "dotenv";
 import { GetUsersController } from "./controllers/get-users/get-users";
 import { MongoGetUsersRepository } from "./repositories/get-users/mongo-get-users";
 import { MongoClient } from "./database/mongo";
+import { MongoCreateUserRepository } from "./repositories/create-user/mongo-create-users";
+import { CreateUserController } from "./controllers/create-user/create-user";
 
 const main = async () => {
   config();
 
   const app = express();
 
+  app.use(express.json()); // vai converter para json todas as nossas request
+
   await MongoClient.connect();
 
   app.get("/", (_req: Request, res: Response) => {
-    res.send("O Docker está funcionando...").status(200);
+    res.status(200).send("O Docker está funcionando...");
   });
 
   app.get("/users", async (_req: Request, res: Response) => {
@@ -21,7 +25,21 @@ const main = async () => {
 
     const { body, statusCode } = await getUsersController.handle();
 
-    res.send(body).status(statusCode);
+    res.status(statusCode).send(body);
+  });
+
+  app.post("/createUser", async (req: Request, res: Response) => {
+    const mongoCreateUserRepository = new MongoCreateUserRepository();
+
+    const createUserController = new CreateUserController(
+      mongoCreateUserRepository,
+    );
+
+    const { body, statusCode } = await createUserController.handle({
+      body: req.body,
+    });
+
+    res.status(statusCode).send(body);
   });
 
   const port = process.env.PORT || 3000;
