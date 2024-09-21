@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /**
  * Esse aqui terá todas as interfaces em comum entre os controllers
  */
@@ -10,7 +11,7 @@ export interface HttpResponse<T> {
 }
 
 export interface HttpRequest<B> {
-  params?: unknown;
-  headers?: unknown;
+  params?: any;
+  headers?: any;
   body?: B;
 }

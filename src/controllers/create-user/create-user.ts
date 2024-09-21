@@ -5,7 +5,7 @@ import {
   ICreateUserController,
   ICreateUserRepository,
 } from "./protocols";
-import { userSchema } from "../schemas/userSchema";
+import { createUserSchema } from "./create-user-schema";
 
 export class CreateUserController implements ICreateUserController {
   constructor(private readonly createUserRepository: ICreateUserRepository) {}
@@ -15,7 +15,7 @@ export class CreateUserController implements ICreateUserController {
     try {
       const { body } = HttpRequest;
 
-      const result = userSchema.safeParse(body);
+      const result = createUserSchema.safeParse(body);
 
       if (!result.success) {
         return {

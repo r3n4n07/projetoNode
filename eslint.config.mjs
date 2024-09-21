@@ -8,6 +8,8 @@ export default [
   {
     files: ["**/*.ts"],
     rules: {
+      "no-unsafe-optional-chaining": "off",
+      "@typescript-eslint/no-explicit-any": "off",
       "@typescript-eslint/no-unused-vars": [
         "error",
         {
