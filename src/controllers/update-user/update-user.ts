@@ -14,6 +14,7 @@ export class UpdateUserController implements IUpdateUserController {
 
       const validateId = updateUserParamsSchema.safeParse(id);
       const validateBody = updateUserSchema.safeParse(body);
+
       if (!validateId.success) {
         return {
           statusCode: 400,
