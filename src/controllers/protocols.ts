@@ -7,7 +7,7 @@ import { ZodIssue } from "zod";
 
 export interface HttpResponse<T> {
   statusCode: number;
-  body: T | string | ZodIssue[];
+  body: T | ZodIssue[];
 }
 
 export interface HttpRequest<B> {
