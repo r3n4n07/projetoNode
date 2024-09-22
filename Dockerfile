@@ -1,7 +1,4 @@
-###################################################
-# Stage: base
-# We will use this version of the nodeJs 
-###################################################
+# Use this version of the nodeJs 
 FROM node:22.9.0
 
 # create a folder to store the project
@@ -21,9 +18,3 @@ CMD ["npm", "run", "start:dev"]
 
 # Expose the port where the application will listen for incoming connections
 EXPOSE 8000
-
-
-###################################################
-# Stage: base
-# We will use this version of the nodeJs 
-###################################################

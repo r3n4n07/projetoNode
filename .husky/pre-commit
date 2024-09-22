@@ -1,6 +1,6 @@
 echo 'Check for linting errors'
 
-npm run check || (echo 'Linting errors or test failed' && exit 1);
+npm run check || (echo 'Linting errors' && exit 1);
 
 echo "Check for jest tests"
 

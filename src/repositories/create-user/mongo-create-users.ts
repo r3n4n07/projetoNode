@@ -5,6 +5,7 @@ import {
 import { MongoClient } from "@/database/mongo";
 import { User } from "@/models/user";
 import { MongoUser } from "../mongo-protocols";
+import { fixUserResponse } from "../helpers";
 
 export class MongoCreateUserRepository implements ICreateUserRepository {
   async createUser(params: CreateUserParams): Promise<User> {
@@ -31,8 +32,6 @@ export class MongoCreateUserRepository implements ICreateUserRepository {
     /**
      * if the user was created, destructure the object to replace the _id attribute with id
      */
-    const { _id, ...rest } = user;
-
-    return { id: _id.toHexString(), ...rest };
+    return fixUserResponse(user);
   }
 }
