@@ -18,13 +18,11 @@ export class UpdateUserController implements IController {
       const validateId = updateUserParamsSchema.safeParse(id);
       const validateBody = updateUserSchema.safeParse(body);
 
-      if (!validateId.success) {
+      if (!validateId.success)
         return badRequest(validateId.error.errors[0].message);
-      }
 
-      if (!validateBody.success) {
+      if (!validateBody.success)
         return badRequest(validateBody.error.errors[0].message);
-      }
 
       const user = await this.updateUserRepository.updateUser(
         id,
