@@ -9,7 +9,7 @@
     "start:dev": "nodemon --watch \"src/\" --exec \"ts-node -r tsconfig-paths/register src/index.ts\" -e ts",
     "lint": "eslint .",
     "prepare": "husky install",
-    "check": "eslint src",
+    "check": "eslint src --fix",
     "test": "jest --passWithNoTests",
     "test:watch": "npm test --watch",
     "test:staged": "npm run test --findRelatedTests",

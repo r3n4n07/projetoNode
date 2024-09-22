@@ -1,9 +1,4 @@
 import { User } from "@/models/user";
-import { HttpRequest, HttpResponse } from "../protocols";
-
-export interface IUpdateUserController {
-  handle(HttpRequest: HttpRequest<unknown>): Promise<HttpResponse<User>>;
-}
 
 export interface UpdateUserParams {
   firstName?: string;
