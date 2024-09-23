@@ -8,8 +8,8 @@ const main = async () => {
 
   const app = express();
 
-  app.use(express.json()); // parse responses to json
-  await MongoClient.connect(); // Conect database
+  app.use(express.json());
+  await MongoClient.connect();
 
   app.use("/users", userRoutes);
 

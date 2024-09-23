@@ -1,5 +1,4 @@
 /* eslint-disable no-unsafe-optional-chaining */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { User } from "@/models/user";
 import { HttpRequest, HttpResponse, IController } from "../protocols";
 import { IDeleteUserRepository } from "./protocols";
@@ -9,14 +8,12 @@ export class DeleteUserController implements IController {
   constructor(private readonly deleteUserRepository: IDeleteUserRepository) {}
 
   async handle(
-    httpRequest: HttpRequest<any>,
+    httpRequest: HttpRequest<unknown>,
   ): Promise<HttpResponse<User | string>> {
     try {
       const { id } = httpRequest?.params;
 
-      if (!id) {
-        return badRequest("Missing user id");
-      }
+      if (!id) return badRequest("Missing user id");
 
       const user = await this.deleteUserRepository.deleteUser(id);
 

@@ -7,6 +7,9 @@ import { fixUserResponse } from "../helpers";
 
 export class MongoDeleteUserRepository implements IDeleteUserRepository {
   async deleteUser(id: string): Promise<User> {
+    /**
+     * Retrieve a user from the "users" colletion
+     */
     const user = await MongoClient.db
       .collection<MongoUser>("users")
       .findOne({ _id: new ObjectId(id) });
@@ -15,6 +18,9 @@ export class MongoDeleteUserRepository implements IDeleteUserRepository {
       throw new Error("User not found");
     }
 
+    /**
+     * Delete a user from the "users" collection
+     */
     const { deletedCount } = await MongoClient.db
       .collection("users")
       .deleteOne({ _id: new ObjectId(id) });
@@ -23,6 +29,9 @@ export class MongoDeleteUserRepository implements IDeleteUserRepository {
       throw new Error("User not deleted");
     }
 
+    /**
+     * Return a new user where _id is replaced with id
+     */
     return fixUserResponse(user);
   }
 }

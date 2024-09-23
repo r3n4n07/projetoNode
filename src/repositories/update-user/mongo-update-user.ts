@@ -10,10 +10,16 @@ import { fixUserResponse } from "../helpers";
 
 export class MongoUpdateUserRepository implements IUpdateUserRepository {
   async updateUser(id: string, params: UpdateUserParams): Promise<User> {
+    /**
+     * Update user
+     */
     await MongoClient.db
       .collection("users")
       .updateOne({ _id: new ObjectId(id) }, { $set: { ...params } });
 
+    /**
+     * Retrieve a user from the "users" colletion
+     */
     const user = await MongoClient.db
       .collection<MongoUser>("users")
       .findOne({ _id: new ObjectId(id) });
@@ -22,6 +28,9 @@ export class MongoUpdateUserRepository implements IUpdateUserRepository {
       throw new Error("user not update");
     }
 
+    /**
+     * Return a new user where _id is replaced with id
+     */
     return fixUserResponse(user);
   }
 }

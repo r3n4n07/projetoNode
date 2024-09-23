@@ -1,13 +1,11 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import { HttpResponse, HttpStatusCode } from "./protocols";
 
-export const okResponse = <T>(body: any): HttpResponse<T> => ({
+export const okResponse = <T>(body: unknown): HttpResponse<T> => ({
   statusCode: HttpStatusCode.OK,
   body,
 });
 
-export const created = <T>(body: any): HttpResponse<T> => ({
+export const created = <T>(body: unknown): HttpResponse<T> => ({
   statusCode: HttpStatusCode.CREATED,
   body,
 });

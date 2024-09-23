@@ -1,13 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-/**
- * Esse aqui terá todas as interfaces em comum entre os controllers
- */
-
 import { ZodIssue } from "zod";
 
 export interface HttpResponse<T> {
   statusCode: HttpStatusCode;
-  body: T | ZodIssue[];
+  body: T | ZodIssue[] | unknown;
 }
 
 export interface HttpRequest<B> {

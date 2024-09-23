@@ -15,9 +15,7 @@ export class CreateUserController implements IController {
 
       const result = createUserSchema.safeParse(body);
 
-      if (!result.success) {
-        return badRequest(result.error?.errors[0].message);
-      }
+      if (!result.success) return badRequest(result.error?.errors[0].message);
 
       const user = await this.createUserRepository.createUser(result.data);
 

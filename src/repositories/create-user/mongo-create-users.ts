@@ -23,14 +23,10 @@ export class MongoCreateUserRepository implements ICreateUserRepository {
       .collection<MongoUser>("users")
       .findOne({ _id: insertedId });
 
-    /**
-     *  if the user not created, throw an error
-     */
-
     if (!user) throw new Error("User not created");
 
     /**
-     * if the user was created, destructure the object to replace the _id attribute with id
+     * Return a new user where _id is replaced with id
      */
     return fixUserResponse(user);
   }

@@ -1,3 +1,4 @@
+/* eslint-disable no-unsafe-optional-chaining */
 import { User } from "@/models/user";
 import { HttpRequest, HttpResponse, IController } from "../protocols";
 import { IUpdateUserRepository, UpdateUserParams } from "./protocols";
@@ -11,7 +12,6 @@ export class UpdateUserController implements IController {
     httpRequest: HttpRequest<UpdateUserParams>,
   ): Promise<HttpResponse<User | string>> {
     try {
-      // eslint-disable-next-line no-unsafe-optional-chaining
       const { id } = httpRequest?.params;
       const { body } = httpRequest;
 
@@ -25,7 +25,7 @@ export class UpdateUserController implements IController {
         return badRequest(validateBody.error.errors[0].message);
 
       const user = await this.updateUserRepository.updateUser(
-        id,
+        validateId.data,
         validateBody.data,
       );
 
